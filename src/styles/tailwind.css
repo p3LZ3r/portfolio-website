@@ -1,0 +1,64 @@
+/**
+ * Tailwind CSS Entry Point
+ * 
+ * This file follows Tailwind's recommended layering and ordering structure.
+ * It imports global styles, components, and utilities in the correct order.
+ */
+
+/* Import Tailwind CSS */
+@import "tailwindcss";
+
+/* Import global styles (fonts, variables, resets, base styles) */
+@layer base {
+  @import "./global.css";
+}
+
+/* Import component classes */
+@layer components {
+  @import "./tailwind-components.css";
+}
+
+@layer utilities {
+  /* Screen reader only utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Visually hidden utility */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Skip link for accessibility */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--color-text-primary);
+    color: var(--color-bg-primary);
+    padding: 8px;
+    text-decoration: none;
+    z-index: 1000;
+    transition: top var(--transition-fast);
+  }
+
+  .skip-link:focus {
+    top: 6px;
+  }
+}

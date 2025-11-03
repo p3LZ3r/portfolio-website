@@ -1,796 +1,207 @@
 /**
- * Global CSS Entry Point
- *
- * This is the main CSS file that consolidates all styles following Tailwind CSS v4
- * recommended layering and ordering. It includes fonts, variables, base styles,
- * components, utilities, and animations in a single file.
- *
- * Structure follows Tailwind's recommended approach:
- * - @import "tailwindcss"
- * - @layer base (fonts, variables, resets, base styles)
- * - @layer components (reusable component classes)
- * - @layer utilities (low-level utility helpers)
- * - Animations and keyframes
+ * Global CSS Base Styles
+ * 
+ * This file contains the base layer styles including fonts, CSS variables,
+ * resets, base typography, and reduced-motion rules. It follows Tailwind's
+ * recommended base layer structure.
  */
 
 /* Import animations first */
 @import "./animations.css";
 
-/* Import Tailwind CSS */
-@import "tailwindcss";
-
 /* ========================================
    BASE LAYER - Fonts, Variables, Resets
    ======================================== */
-@layer base {
-  /* Font Face Declarations */
-  @font-face {
-    font-family: "heading";
-    src: url("../assets/fonts/heading/heading-Regular.otf") format("opentype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
 
-  @font-face {
-    font-family: "heading";
-    src: url("../assets/fonts/heading/heading-Italic.otf") format("opentype");
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-  }
+/* Font Face Declarations */
+@font-face {
+  font-family: "heading";
+  src: url("../assets/fonts/heading/heading-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: "heading";
-    src: url("../assets/fonts/heading/heading-Ultralight.otf") format("opentype");
-    font-weight: 200;
-    font-style: normal;
-    font-display: swap;
-  }
+@font-face {
+  font-family: "heading";
+  src: url("../assets/fonts/heading/heading-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: "heading";
-    src: url("../assets/fonts/heading/heading-UltralightItalic.otf")
-      format("opentype");
-    font-weight: 200;
-    font-style: italic;
-    font-display: swap;
-  }
+@font-face {
+  font-family: "heading";
+  src: url("../assets/fonts/heading/heading-Ultralight.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: "heading";
-    src: url("../assets/fonts/heading/heading-Ultrabold.otf") format("opentype");
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
-  }
+@font-face {
+  font-family: "heading";
+  src: url("../assets/fonts/heading/heading-UltralightItalic.otf")
+    format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: "heading";
-    src: url("../assets/fonts/heading/heading-UltraboldItalic.otf")
-      format("opentype");
-    font-weight: 800;
-    font-style: italic;
-    font-display: swap;
-  }
+@font-face {
+  font-family: "heading";
+  src: url("../assets/fonts/heading/heading-Ultrabold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: "body";
-    src: url("../assets/fonts/body/body-Variable.ttf") format("truetype");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
+@font-face {
+  font-family: "heading";
+  src: url("../assets/fonts/heading/heading-UltraboldItalic.otf")
+    format("opentype");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
 
-  /* CSS Variables and Resets */
-  :root {
-    /* Colors from Figma */
-    --color-text-primary: #f5f5f5;
-    --color-text-secondary: #1e1e1e;
-    --color-text-muted: #b3b3b3;
-    --color-bg-primary: #2c2c2c;
-    --color-bg-secondary: rgba(255, 255, 255, 0.25);
-    --color-accent: #2c2c2c;
-    --color-accent-hover: rgba(140, 140, 140, 0.25);
+@font-face {
+  font-family: "body";
+  src: url("../assets/fonts/body/body-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
-    /* Typography */
-    --font-family-primary: "heading", serif;
-    --font-family-secondary: "body", sans-serif;
+/* CSS Variables and Resets */
+:root {
+  /* Colors from Figma */
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #1e1e1e;
+  --color-text-muted: #b3b3b3;
+  --color-bg-primary: #2c2c2c;
+  --color-bg-secondary: rgba(255, 255, 255, 0.25);
+  --color-accent: #2c2c2c;
+  --color-accent-hover: rgba(140, 140, 140, 0.25);
 
-    /* Spacing */
-    --spacing-xs: 8px;
-    --spacing-sm: 16px;
-    --spacing-md: 24px;
-    --spacing-lg: 32px;
-    --spacing-xl: 48px;
+  /* Typography */
+  --font-family-primary: "heading", serif;
+  --font-family-secondary: "body", sans-serif;
 
-    /* Border radius */
-    --border-radius-sm: 16px;
-    --border-radius-lg: 24px;
-    --border-radius-full: 100px;
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
 
-    /* Shadows */
-    --shadow-primary:
-      0px 1px 8px 0px rgba(0, 0, 0, 0.1), 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
-    --shadow-inset:
-      inset 0px 0px 8px 0px rgba(242, 242, 242, 1), inset 0px 0px 0px 1px rgba(
-        166,
-        166,
-        166,
-        1
-      ), inset -2px -2px 0.5px -2px rgba(38, 38, 38, 1), inset 2px 2px 0.5px -2px rgba(
-        38,
-        38,
-        38,
-        1
-      ), inset 3px 3px 0.5px -3.5px rgba(255, 255, 255, 1);
-    --shadow-backdrop: blur(14.4px);
+  /* Border radius */
+  --border-radius-sm: 16px;
+  --border-radius-lg: 24px;
+  --border-radius-full: 100px;
 
-    /* Transitions */
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
+  /* Shadows */
+  --shadow-primary:
+    0px 1px 8px 0px rgba(0, 0, 0, 0.1), 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
+  --shadow-inset:
+    inset 0px 0px 8px 0px rgba(242, 242, 242, 1), inset 0px 0px 0px 1px rgba(
+      166,
+      166,
+      166,
+      1
+    ), inset -2px -2px 0.5px -2px rgba(38, 38, 38, 1), inset 2px 2px 0.5px -2px rgba(
+      38,
+      38,
+      38,
+      1
+    ), inset 3px 3px 0.5px -3.5px rgba(255, 255, 255, 1);
+  --shadow-backdrop: blur(14.4px);
 
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-tap-highlight-color: transparent;
-  }
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
 
-  /* CSS Reset and Base Styles */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* CSS Reset and Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-family-secondary);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  container-type: inline-size;
+  overflow: none;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    box-sizing: border-box;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
+}
 
-  html {
-    font-family: var(--font-family-secondary);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.2;
-    color: var(--color-text-primary);
-    background-color: var(--color-bg-primary);
-    scroll-behavior: smooth;
-  }
-
-  body {
-    min-height: 100vh;
-    width: 100vw;
-    padding: 0;
-    margin: 0;
-    position: relative;
+/* Container queries support */
+@supports (container-type: inline-size) {
+  .container {
     container-type: inline-size;
-    overflow: none;
-  }
-
-  /* Focus styles */
-  :focus-visible {
-    outline: 2px solid var(--color-text-primary);
-    outline-offset: 2px;
-  }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-
-  /* Container queries support */
-  @supports (container-type: inline-size) {
-    .container {
-      container-type: inline-size;
-    }
-  }
-
-  /* Fluid typography */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-family-primary);
-    font-weight: 200;
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-    line-height: 1em;
-  }
-
-  h1 {
-    font-size: clamp(2.5rem, 5vw, 4.6875rem);
-  }
-
-  h2 {
-    font-size: clamp(1.5rem, 3vw, 2.8125rem);
-  }
-
-  p {
-    font-size: clamp(0.875rem, 2vw, 1.4375rem);
-    line-height: 1.2;
   }
 }
 
-/* ========================================
-   COMPONENTS LAYER - Reusable UI Components
-   ======================================== */
-@layer components {
-  /* ========================================
-     BUTTON COMPONENTS
-     Based on patterns found in CallButton.ts and other interactive elements
-     ======================================== */
-
-  /**
-   * Primary button - main call-to-action style
-   * Used for primary actions throughout the application
-   */
-  .c-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-weight: 500;
-    transition: all 0.2s ease-out;
-    outline: none;
-  }
-
-  .c-btn:focus {
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-  }
-
-  .c-btn {
-    background-color: var(--color-bg-primary);
-    color: var(--color-text-primary);
-    border: 1px solid transparent;
-  }
-
-  .c-btn:hover {
-    background-color: var(--color-accent-hover);
-    box-shadow: var(--shadow-primary);
-  }
-
-  .c-btn:active {
-    transform: scale(0.98);
-  }
-
-  .c-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .c-btn:disabled:hover {
-    background-color: var(--color-bg-primary);
-    box-shadow: none;
-  }
-
-  /**
-   * Secondary button - outline style for secondary actions
-   */
-  .c-btn--secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-weight: 500;
-    transition: all 0.2s ease-out;
-    outline: none;
-    background-color: transparent;
-    color: var(--color-text-primary);
-    border: 1px solid var(--color-text-primary);
-  }
-
-  .c-btn--secondary:hover {
-    background-color: var(--color-text-primary);
-    color: var(--color-bg-primary);
-    box-shadow: var(--shadow-primary);
-  }
-
-  .c-btn--secondary:active {
-    transform: scale(0.98);
-  }
-
-  .c-btn--secondary:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .c-btn--secondary:disabled:hover {
-    background-color: transparent;
-    color: var(--color-text-primary);
-  }
-
-  /**
-   * Ghost button - minimal style for subtle actions
-   */
-  .c-btn--ghost {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-weight: 500;
-    transition: all 0.2s ease-out;
-    outline: none;
-    background-color: transparent;
-    color: var(--color-text-primary);
-    border: 1px solid transparent;
-  }
-
-  .c-btn--ghost:hover {
-    background-color: var(--color-bg-secondary);
-    box-shadow: var(--shadow-primary);
-  }
-
-  .c-btn--ghost:active {
-    transform: scale(0.98);
-  }
-
-  .c-btn--ghost:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .c-btn--ghost:disabled:hover {
-    background-color: transparent;
-  }
-
-  /**
-   * Button sizes
-   */
-  .c-btn--sm {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.875rem;
-  }
-
-  .c-btn--lg {
-    padding: 0.75rem 1.5rem;
-    font-size: 1.125rem;
-  }
-
-  /* ========================================
-     FORM COMPONENTS
-     Based on patterns found in FormInput.ts
-     ======================================== */
-
-  /**
-   * Form input field - consistent styling for text inputs
-   */
-  .c-input {
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.375rem;
-    border: 1px solid;
-    transition: all 0.2s ease-out;
-    background-color: var(--color-bg-primary);
-    color: var(--color-text-primary);
-    border-color: #4b5563;
-  }
-
-  .c-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-    border-color: var(--color-accent);
-  }
-
-  .c-input::placeholder {
-    color: var(--color-text-muted);
-  }
-
-  .c-input:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background-color: #374151;
-  }
-
-  /**
-   * Form label - consistent typography for form labels
-   */
-  .c-label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--color-text-primary);
-    margin-bottom: 0.25rem;
-  }
-
-  /**
-   * Form group - container for input + label combinations
-   */
-  .c-form-group {
-    margin-bottom: 1rem;
-  }
-
-  /**
-   * Form error state
-   */
-  .c-input--error {
-    border-color: #ef4444;
-  }
-
-  .c-input--error:focus {
-    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5);
-    border-color: #ef4444;
-  }
-
-  /**
-   * Form helper text
-   */
-  .c-help-text {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    margin-top: 0.25rem;
-  }
-
-  /* ========================================
-     CARD COMPONENTS
-     Based on patterns found in ProjectCard.ts and other container elements
-     ======================================== */
-
-  /**
-   * Base card container - for content sections and feature boxes
-   */
-  .c-card {
-    background-color: var(--color-bg-primary);
-    border-radius: 0.5rem;
-    border: 1px solid #4b5563;
-    box-shadow: var(--shadow-primary);
-    transition: all 0.3s ease-out;
-  }
-
-  .c-card:hover {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    border-color: #6b7280;
-  }
-
-  /**
-   * Card with padding - standard content card
-   */
-  .c-card--padded {
-    padding: 1rem;
-  }
-
-  /**
-   * Card with large padding - for prominent content
-   */
-  .c-card--padded-lg {
-    padding: 1.5rem;
-  }
-
-  /**
-   * Interactive card - for clickable cards
-   */
-  .c-card--interactive {
-    cursor: pointer;
-  }
-
-  .c-card--interactive:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  }
-
-  .c-card--interactive:active {
-    transform: scale(0.95);
-  }
-
-  /* ========================================
-     NAVIGATION COMPONENTS
-     Based on patterns found in BottomNav.ts
-     ======================================== */
-
-  /**
-   * Navigation container
-   */
-  .c-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--color-bg-primary);
-    border-top: 1px solid #4b5563;
-    padding: 0.5rem 1rem;
-  }
-
-  /**
-   * Navigation item
-   */
-  .c-nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 0.75rem;
-    color: var(--color-text-primary);
-    transition: all 0.2s ease-out;
-  }
-
-  .c-nav-item:hover {
-    color: var(--color-accent-hover);
-    background-color: var(--color-bg-secondary);
-    border-radius: 0.375rem;
-  }
-
-  .c-nav-item:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-  }
-
-  /**
-   * Navigation item active state
-   */
-  .c-nav-item--active {
-    color: var(--color-accent-hover);
-    background-color: var(--color-bg-secondary);
-  }
-
-  /* ========================================
-     TYPOGRAPHY COMPONENTS
-     Based on existing typography patterns
-     ======================================== */
-
-  /**
-   * Heading styles that match the design system
-   */
-  .c-heading {
-    font-family: var(--font-family-primary);
-    font-weight: 200;
-    text-transform: uppercase;
-    letter-spacing: -0.025em;
-    color: var(--color-text-primary);
-  }
-
-  .c-heading--h1 {
-    font-size: clamp(2.25rem, 5vw, 4.6875rem);
-  }
-
-  .c-heading--h2 {
-    font-size: clamp(1.5rem, 3vw, 2.8125rem);
-  }
-
-  .c-heading--h3 {
-    font-size: clamp(1.25rem, 2vw, 1.875rem);
-  }
-
-  /**
-   * Body text that matches the design system
-   */
-  .c-text {
-    font-family: var(--font-family-secondary);
-    color: var(--color-text-primary);
-    line-height: 1.625;
-  }
-
-  .c-text--muted {
-    color: var(--color-text-muted);
-  }
-
-  .c-text--large {
-    font-size: clamp(1.125rem, 2vw, 1.4375rem);
-  }
-
-  /* ========================================
-     LAYOUT COMPONENTS
-     Based on existing layout patterns
-     ======================================== */
-
-  /**
-   * Container with consistent max-width and padding
-   */
-  .c-container {
-    max-width: 80rem;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  @media (min-width: 640px) {
-    .c-container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .c-container {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-  }
-
-  /**
-   * Section spacing - consistent vertical rhythm
-   */
-  .c-section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-
-  @media (min-width: 768px) {
-    .c-section {
-      padding-top: 3rem;
-      padding-bottom: 3rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .c-section {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-    }
-  }
-
-  /**
-   * Grid layouts
-   */
-  .c-grid {
-    display: grid;
-    gap: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    .c-grid {
-      gap: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .c-grid {
-      gap: 2rem;
-    }
-  }
-
-  .c-grid--2 {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-
-  @media (min-width: 768px) {
-    .c-grid--2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  .c-grid--3 {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-
-  @media (min-width: 768px) {
-    .c-grid--3 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .c-grid--3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  /* ========================================
-     UTILITY COMPONENTS
-     Common patterns that don't fit other categories
-     ======================================== */
-
-  /**
-   * Centered content wrapper
-   */
-  .c-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /**
-   * Stack layout - vertical spacing between elements
-   */
-  .c-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .c-stack--sm {
-    gap: 0.5rem;
-  }
-
-  .c-stack--lg {
-    gap: 1.5rem;
-  }
-
-  /**
-   * Badge component for labels and tags
-   */
-  .c-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.125rem 0.625rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    background-color: var(--color-bg-secondary);
-    color: var(--color-text-primary);
-  }
-
-  /**
-   * Divider for content separation
-   */
-  .c-divider {
-    border-top: 1px solid #4b5563;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  /**
-   * Loading spinner
-   */
-  .c-spinner {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    border: 2px solid currentColor;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
+/* Fluid typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-primary);
+  font-weight: 200;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  line-height: 1em;
 }
 
-/* ========================================
-   UTILITIES LAYER - Low-level utility helpers
-   ======================================== */
-@layer utilities {
-  /* Screen reader only utility */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  /* Visually hidden utility */
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  /* Skip link for accessibility */
-  .skip-link {
-    position: absolute;
-    top: -40px;
-    left: 6px;
-    background: var(--color-text-primary);
-    color: var(--color-bg-primary);
-    padding: 8px;
-    text-decoration: none;
-    z-index: 1000;
-    transition: top var(--transition-fast);
-  }
-
-  .skip-link:focus {
-    top: 6px;
-  }
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4.6875rem);
 }
 
-/* Spinner animation */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2.8125rem);
+}
+
+p {
+  font-size: clamp(0.875rem, 2vw, 1.4375rem);
+  line-height: 1.2;
 }

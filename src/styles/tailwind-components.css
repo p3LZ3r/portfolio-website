@@ -1,0 +1,532 @@
+/**
+ * Component Classes
+ * 
+ * This file contains all reusable component classes (.c-* classes)
+ * that were previously defined in global.css. These are now properly
+ * organized in the components layer following Tailwind's recommended structure.
+ */
+
+/* ========================================
+   BUTTON COMPONENTS
+   Based on patterns found in CallButton.ts and other interactive elements
+   ======================================== */
+
+/**
+ * Primary button - main call-to-action style
+ * Used for primary actions throughout the application
+ */
+.c-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s ease-out;
+  outline: none;
+}
+
+.c-btn:focus {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.c-btn {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 1px solid transparent;
+}
+
+.c-btn:hover {
+  background-color: var(--color-accent-hover);
+  box-shadow: var(--shadow-primary);
+}
+
+.c-btn:active {
+  transform: scale(0.98);
+}
+
+.c-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c-btn:disabled:hover {
+  background-color: var(--color-bg-primary);
+  box-shadow: none;
+}
+
+/**
+ * Secondary button - outline style for secondary actions
+ */
+.c-btn--secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s ease-out;
+  outline: none;
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-text-primary);
+}
+
+.c-btn--secondary:hover {
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  box-shadow: var(--shadow-primary);
+}
+
+.c-btn--secondary:active {
+  transform: scale(0.98);
+}
+
+.c-btn--secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c-btn--secondary:disabled:hover {
+  background-color: transparent;
+  color: var(--color-text-primary);
+}
+
+/**
+ * Ghost button - minimal style for subtle actions
+ */
+.c-btn--ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s ease-out;
+  outline: none;
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid transparent;
+}
+
+.c-btn--ghost:hover {
+  background-color: var(--color-bg-secondary);
+  box-shadow: var(--shadow-primary);
+}
+
+.c-btn--ghost:active {
+  transform: scale(0.98);
+}
+
+.c-btn--ghost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c-btn--ghost:disabled:hover {
+  background-color: transparent;
+}
+
+/**
+ * Button sizes
+ */
+.c-btn--sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.c-btn--lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+}
+
+/* ========================================
+   FORM COMPONENTS
+   Based on patterns found in FormInput.ts
+   ======================================== */
+
+/**
+ * Form input field - consistent styling for text inputs
+ */
+.c-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid;
+  transition: all 0.2s ease-out;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border-color: #4b5563;
+}
+
+.c-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  border-color: var(--color-accent);
+}
+
+.c-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.c-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #374151;
+}
+
+/**
+ * Form label - consistent typography for form labels
+ */
+.c-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+/**
+ * Form group - container for input + label combinations
+ */
+.c-form-group {
+  margin-bottom: 1rem;
+}
+
+/**
+ * Form error state
+ */
+.c-input--error {
+  border-color: #ef4444;
+}
+
+.c-input--error:focus {
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5);
+  border-color: #ef4444;
+}
+
+/**
+ * Form helper text
+ */
+.c-help-text {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}
+
+/* ========================================
+   CARD COMPONENTS
+   Based on patterns found in ProjectCard.ts and other container elements
+   ======================================== */
+
+/**
+ * Base card container - for content sections and feature boxes
+ */
+.c-card {
+  background-color: var(--color-bg-primary);
+  border-radius: 0.5rem;
+  border: 1px solid #4b5563;
+  box-shadow: var(--shadow-primary);
+  transition: all 0.3s ease-out;
+}
+
+.c-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: #6b7280;
+}
+
+/**
+ * Card with padding - standard content card
+ */
+.c-card--padded {
+  padding: 1rem;
+}
+
+/**
+ * Card with large padding - for prominent content
+ */
+.c-card--padded-lg {
+  padding: 1.5rem;
+}
+
+/**
+ * Interactive card - for clickable cards
+ */
+.c-card--interactive {
+  cursor: pointer;
+}
+
+.c-card--interactive:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.c-card--interactive:active {
+  transform: scale(0.95);
+}
+
+/* ========================================
+   NAVIGATION COMPONENTS
+   Based on patterns found in BottomNav.ts
+   ======================================== */
+
+/**
+ * Navigation container
+ */
+.c-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-bg-primary);
+  border-top: 1px solid #4b5563;
+  padding: 0.5rem 1rem;
+}
+
+/**
+ * Navigation item
+ */
+.c-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  color: var(--color-text-primary);
+  transition: all 0.2s ease-out;
+}
+
+.c-nav-item:hover {
+  color: var(--color-accent-hover);
+  background-color: var(--color-bg-secondary);
+  border-radius: 0.375rem;
+}
+
+.c-nav-item:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+/**
+ * Navigation item active state
+ */
+.c-nav-item--active {
+  color: var(--color-accent-hover);
+  background-color: var(--color-bg-secondary);
+}
+
+/* ========================================
+   TYPOGRAPHY COMPONENTS
+   Based on existing typography patterns
+   ======================================== */
+
+/**
+ * Heading styles that match the design system
+ */
+.c-heading {
+  font-family: var(--font-family-primary);
+  font-weight: 200;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+}
+
+.c-heading--h1 {
+  font-size: clamp(2.25rem, 5vw, 4.6875rem);
+}
+
+.c-heading--h2 {
+  font-size: clamp(1.5rem, 3vw, 2.8125rem);
+}
+
+.c-heading--h3 {
+  font-size: clamp(1.25rem, 2vw, 1.875rem);
+}
+
+/**
+ * Body text that matches the design system
+ */
+.c-text {
+  font-family: var(--font-family-secondary);
+  color: var(--color-text-primary);
+  line-height: 1.625;
+}
+
+.c-text--muted {
+  color: var(--color-text-muted);
+}
+
+.c-text--large {
+  font-size: clamp(1.125rem, 2vw, 1.4375rem);
+}
+
+/* ========================================
+   LAYOUT COMPONENTS
+   Based on existing layout patterns
+   ======================================== */
+
+/**
+ * Container with consistent max-width and padding
+ */
+.c-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .c-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .c-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/**
+ * Section spacing - consistent vertical rhythm
+ */
+.c-section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .c-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .c-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+/**
+ * Grid layouts
+ */
+.c-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .c-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .c-grid {
+    gap: 2rem;
+  }
+}
+
+.c-grid--2 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .c-grid--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.c-grid--3 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .c-grid--3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .c-grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ========================================
+   UTILITY COMPONENTS
+   Common patterns that don't fit other categories
+   ======================================== */
+
+/**
+ * Centered content wrapper
+ */
+.c-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/**
+ * Stack layout - vertical spacing between elements
+ */
+.c-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.c-stack--sm {
+  gap: 0.5rem;
+}
+
+.c-stack--lg {
+  gap: 1.5rem;
+}
+
+/**
+ * Badge component for labels and tags
+ */
+.c-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+/**
+ * Divider for content separation
+ */
+.c-divider {
+  border-top: 1px solid #4b5563;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/**
+ * Loading spinner
+ */
+.c-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
