@@ -1,8 +1,10 @@
 import { html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
+import { shadowDomStyles } from "../styles/shadow-dom.css";
 
 @customElement("contact-page")
 export class ContactPage extends LitElement {
+  static styles = [shadowDomStyles];
   @state() private readonly formData = {
     name: "",
     company: "",

@@ -1,8 +1,10 @@
 import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
+import { shadowDomStyles } from "../styles/shadow-dom.css";
 
 @customElement("about-page")
 export class AboutPage extends LitElement {
+  static styles = [shadowDomStyles];
   render() {
     return html`
       <div class="fixed inset-0 -z-10 bg-gray-800 blur-md"></div>

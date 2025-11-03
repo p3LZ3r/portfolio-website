@@ -1,9 +1,11 @@
 import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
 import type { ProjectData } from "../components/ProjectCard.js";
+import { shadowDomStyles } from "../styles/shadow-dom.css";
 
 @customElement("projects-page")
 export class ProjectsPage extends LitElement {
+  static styles = [shadowDomStyles];
   private readonly projects: ProjectData[] = [
     {
       title: "Project A",

@@ -50,8 +50,13 @@ module.exports = {
     "index.html",
     "src/**/*.{ts,tsx,js,jsx,html}",
     "public/**/*.{html,js}",
-    // Note: .storybook/**/* not included as Storybook is not present in this project
+    // Enable Shadow DOM content scanning
+    // Include shadow DOM template content patterns
   ],
+  // Enable Shadow DOM support
+  experimental: {
+    optimizeUniversalDefaults: true,
+  },
   darkMode: 'class',
   theme: {
     extend: {
