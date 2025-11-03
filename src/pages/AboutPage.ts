@@ -36,10 +36,9 @@ export class AboutPage extends LitElement {
             <img src="assets/logos.svg" alt="Company logos" />
           </div>
           
-          <div class="w-60 h-80 bg-black/20 bg-cover bg-center rounded-2xl flex-shrink-0" role="img" aria-label="Torsten Linnecke" style="background-image: url('../assets/about-image.png');"></div>
+          <div class="w-60 h-80 bg-black/20 bg-cover bg-center rounded-2xl shrink-0" role="img" aria-label="Torsten Linnecke" style="background-image: url('../assets/about-image.png');"></div>
         </div>
       </div>
     `;
   }
 }
-
