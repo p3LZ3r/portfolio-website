@@ -1,0 +1,305 @@
+/**
+ * Tailwind Components Entry Point
+ * 
+ * This file contains reusable component classes built on top of Tailwind's utility classes.
+ * These components are designed to match the existing design system patterns identified
+ * in the style audit (STYLE_AUDIT_REPORT.md).
+ * 
+ * Components are organized by pattern and use @apply directives to compose Tailwind utilities
+ * with the project's custom design tokens.
+ * 
+ * Migration Reference: TAILWIND_MIGRATION_REPORT.md
+ */
+
+/* Import Tailwind layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Component Layer */
+@layer components {
+  
+  /* ========================================
+     BUTTON COMPONENTS
+     Based on patterns found in CallButton.ts and other interactive elements
+     ======================================== */
+  
+  /**
+   * Primary button - main call-to-action style
+   * Used for primary actions throughout the application
+   */
+  .c-btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply bg-primary text-text-primary border border-transparent;
+    @apply hover:bg-accent-hover hover:shadow-primary active:scale-98;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary disabled:hover:shadow-none;
+  }
+  
+  /**
+   * Secondary button - outline style for secondary actions
+   */
+  .c-btn--secondary {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply bg-transparent text-text-primary border border-text-primary;
+    @apply hover:bg-text-primary hover:text-primary hover:shadow-primary active:scale-98;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-text-primary;
+  }
+  
+  /**
+   * Ghost button - minimal style for subtle actions
+   */
+  .c-btn--ghost {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply bg-transparent text-text-primary border border-transparent;
+    @apply hover:bg-bgSecondary hover:shadow-primary active:scale-98;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent;
+  }
+  
+  /**
+   * Button sizes
+   */
+  .c-btn--sm {
+    @apply px-3 py-1.5 text-sm;
+  }
+  
+  .c-btn--lg {
+    @apply px-6 py-3 text-lg;
+  }
+  
+  /* ========================================
+     FORM COMPONENTS
+     Based on patterns found in FormInput.ts
+     ======================================== */
+  
+  /**
+   * Form input field - consistent styling for text inputs
+   */
+  .c-input {
+    @apply w-full px-3 py-2 rounded-md border transition-all duration-200 ease-out;
+    @apply bg-primary text-text-primary border-gray-600;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent;
+    @apply placeholder:text-muted;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-800;
+  }
+  
+  /**
+   * Form label - consistent typography for form labels
+   */
+  .c-label {
+    @apply block text-sm font-medium text-text-primary mb-1;
+  }
+  
+  /**
+   * Form group - container for input + label combinations
+   */
+  .c-form-group {
+    @apply mb-4;
+  }
+  
+  /**
+   * Form error state
+   */
+  .c-input--error {
+    @apply border-red-500 focus:ring-red-500 focus:border-red-500;
+  }
+  
+  /**
+   * Form helper text
+   */
+  .c-help-text {
+    @apply text-sm text-muted mt-1;
+  }
+  
+  /* ========================================
+     CARD COMPONENTS
+     Based on patterns found in ProjectCard.ts and other container elements
+     ======================================== */
+  
+  /**
+   * Base card container - for content sections and feature boxes
+   */
+  .c-card {
+    @apply bg-primary rounded-lg border border-gray-600 shadow-primary;
+    @apply transition-all duration-300 ease-out;
+    @apply hover:shadow-lg hover:border-gray-500;
+  }
+  
+  /**
+   * Card with padding - standard content card
+   */
+  .c-card--padded {
+    @apply c-card p-4;
+  }
+  
+  /**
+   * Card with large padding - for prominent content
+   */
+  .c-card--padded-lg {
+    @apply c-card p-6;
+  }
+  
+  /**
+   * Interactive card - for clickable cards
+   */
+  .c-card--interactive {
+    @apply c-card cursor-pointer;
+    @apply hover:scale-105 hover:shadow-lg;
+    @apply active:scale-95;
+  }
+  
+  /* ========================================
+     NAVIGATION COMPONENTS
+     Based on patterns found in BottomNav.ts
+     ======================================== */
+  
+  /**
+   * Navigation container
+   */
+  .c-nav {
+    @apply flex items-center justify-between;
+    @apply bg-primary border-t border-gray-600;
+    @apply px-4 py-2;
+  }
+  
+  /**
+   * Navigation item
+   */
+  .c-nav-item {
+    @apply flex flex-col items-center justify-center px-3 py-2;
+    @apply text-text-primary transition-all duration-200 ease-out;
+    @apply hover:text-accent-hover hover:bg-bgSecondary rounded-md;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+  }
+  
+  /**
+   * Navigation item active state
+   */
+  .c-nav-item--active {
+    @apply c-nav-item text-accent-hover bg-bgSecondary;
+  }
+  
+  /* ========================================
+     TYPOGRAPHY COMPONENTS
+     Based on existing typography patterns
+     ======================================== */
+  
+  /**
+   * Heading styles that match the design system
+   */
+  .c-heading {
+    @apply font-heading font-light uppercase tracking-tight;
+    @apply text-text-primary;
+  }
+  
+  .c-heading--h1 {
+    @apply c-heading text-4xl md:text-6xl lg:text-7xl;
+  }
+  
+  .c-heading--h2 {
+    @apply c-heading text-2xl md:text-4xl lg:text-5xl;
+  }
+  
+  .c-heading--h3 {
+    @apply c-heading text-xl md:text-2xl lg:text-3xl;
+  }
+  
+  /**
+   * Body text that matches the design system
+   */
+  .c-text {
+    @apply font-body text-text-primary leading-relaxed;
+  }
+  
+  .c-text--muted {
+    @apply c-text text-muted;
+  }
+  
+  .c-text--large {
+    @apply c-text text-lg md:text-xl;
+  }
+  
+  /* ========================================
+     LAYOUT COMPONENTS
+     Based on existing layout patterns
+     ======================================== */
+  
+  /**
+   * Container with consistent max-width and padding
+   */
+  .c-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /**
+   * Section spacing - consistent vertical rhythm
+   */
+  .c-section {
+    @apply py-8 md:py-12 lg:py-16;
+  }
+  
+  /**
+   * Grid layouts
+   */
+  .c-grid {
+    @apply grid gap-4 md:gap-6 lg:gap-8;
+  }
+  
+  .c-grid--2 {
+    @apply c-grid grid-cols-1 md:grid-cols-2;
+  }
+  
+  .c-grid--3 {
+    @apply c-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+  
+  /* ========================================
+     UTILITY COMPONENTS
+     Common patterns that don't fit other categories
+     ======================================== */
+  
+  /**
+   * Centered content wrapper
+   */
+  .c-center {
+    @apply flex items-center justify-center;
+  }
+  
+  /**
+   * Stack layout - vertical spacing between elements
+   */
+  .c-stack {
+    @apply flex flex-col space-y-4;
+  }
+  
+  .c-stack--sm {
+    @apply c-stack space-y-2;
+  }
+  
+  .c-stack--lg {
+    @apply c-stack space-y-6;
+  }
+  
+  /**
+   * Badge component for labels and tags
+   */
+  .c-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    @apply bg-bgSecondary text-text-primary;
+  }
+  
+  /**
+   * Divider for content separation
+   */
+  .c-divider {
+    @apply border-t border-gray-600 my-4;
+  }
+  
+  /**
+   * Loading spinner
+   */
+  .c-spinner {
+    @apply inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full;
+    @apply animate-spin;
+  }
+  
+}
