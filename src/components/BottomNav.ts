@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 /**
@@ -28,7 +28,7 @@ export class BottomNav extends LitElement {
     );
   }
 
-  private _handleHashChange = () => {
+  private readonly _handleHashChange = () => {
     const hash = window.location.hash.slice(1);
     this.current = hash || 'about';
   };
@@ -46,15 +46,15 @@ export class BottomNav extends LitElement {
 
   render() {
     return html`
-      <nav>
+      <nav class="fixed bottom-4 left-4 flex flex-col gap-3 z-[1000] bg-white/25 backdrop-blur-xl rounded-2xl p-4 shadow-lg animate-in slide-in-from-left duration-500">
         <button
           type="button"
           @click=${() => this._handleNavigate('about')}
           aria-current=${this.current === 'about' ? 'true' : 'false'}
-          class=${this.current === 'about' ? 'active' : ''}
+          class="w-11 h-11 rounded-full bg-transparent border-none cursor-pointer flex items-center justify-center transition-all duration-200 relative hover:scale-110 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 ${this.current === 'about' ? 'scale-125 bg-blue-500 shadow-xl' : ''}"
           aria-label="Navigate to Home"
         >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="w-5 h-5 fill-gray-100 transition-colors duration-200 ${this.current === 'about' ? 'fill-gray-200' : ''}">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
             <polyline points="9,22 9,12 15,12 15,22"/>
           </svg>
@@ -63,10 +63,10 @@ export class BottomNav extends LitElement {
           type="button"
           @click=${() => this._handleNavigate('projects')}
           aria-current=${this.current === 'projects' ? 'true' : 'false'}
-          class=${this.current === 'projects' ? 'active' : ''}
+          class="w-11 h-11 rounded-full bg-transparent border-none cursor-pointer flex items-center justify-center transition-all duration-200 relative hover:scale-110 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 ${this.current === 'projects' ? 'scale-125 bg-blue-500 shadow-xl' : ''}"
           aria-label="Navigate to Projects"
         >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="w-5 h-5 fill-gray-100 transition-colors duration-200 ${this.current === 'projects' ? 'fill-gray-200' : ''}">
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
             <line x1="8" y1="21" x2="16" y2="21"/>
             <line x1="12" y1="17" x2="12" y2="21"/>
@@ -76,10 +76,10 @@ export class BottomNav extends LitElement {
           type="button"
           @click=${() => this._handleNavigate('contact')}
           aria-current=${this.current === 'contact' ? 'true' : 'false'}
-          class=${this.current === 'contact' ? 'active' : ''}
+          class="w-11 h-11 rounded-full bg-transparent border-none cursor-pointer flex items-center justify-center transition-all duration-200 relative hover:scale-110 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 ${this.current === 'contact' ? 'scale-125 bg-blue-500 shadow-xl' : ''}"
           aria-label="Navigate to Contact"
         >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="w-5 h-5 fill-gray-100 transition-colors duration-200 ${this.current === 'contact' ? 'fill-gray-200' : ''}">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
             <polyline points="22,6 12,13 2,6"/>
           </svg>
@@ -87,88 +87,4 @@ export class BottomNav extends LitElement {
       </nav>
     `;
   }
-
-  static styles = css`
-    nav {
-      position: fixed;
-      bottom: var(--spacing-sm);
-      left: var(--spacing-sm);
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-xs);
-      z-index: 1000;
-      background: var(--color-bg-secondary);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: var(--border-radius-lg);
-      padding: var(--spacing-sm);
-      box-shadow: var(--shadow-primary);
-      animation: slideIn 0.5s ease-out;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    button {
-      background: transparent;
-      border: none;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-      position: relative;
-    }
-
-    button svg {
-      width: 20px;
-      height: 20px;
-      fill: var(--color-text-primary);
-      transition: fill var(--transition-fast);
-    }
-
-    button:hover,
-    button:focus-visible {
-      transform: scale(1.1);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    button.active {
-      transform: scale(1.2);
-      background: var(--color-accent);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-    }
-
-    button.active svg {
-      fill: var(--color-text-secondary);
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        gap: var(--spacing-xs);
-        padding: var(--spacing-xs);
-      }
-
-      button {
-        width: 40px;
-        height: 40px;
-      }
-
-      button svg {
-        width: 18px;
-        height: 18px;
-      }
-    }
-  `;
 }

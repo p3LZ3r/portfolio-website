@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 @customElement('call-button')
@@ -6,76 +6,14 @@ export class CallButton extends LitElement {
   @property({ type: String }) label = 'Call Me Maybe';
   @property({ type: String }) href = 'tel:+1234567890';
 
-  static styles = css`
-    :host {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: #2C2C2C;
-      background: linear-gradient(135deg, rgba(140, 140, 140, 0.25), rgba(140, 140, 140, 0.25));
-      border-radius: 100px;
-      box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.1), 0px 0px 2px 0px rgba(0, 0, 0, 0.1), inset 0px 0px 8px 0px rgba(242, 242, 242, 1), inset 0px 0px 0px 1px rgba(166, 166, 166, 1), inset -2px -2px 0.5px -2px rgba(38, 38, 38, 1), inset 2px 2px 0.5px -2px rgba(38, 38, 38, 1), inset 3px 3px 0.5px -3.5px rgba(255, 255, 255, 1);
-      backdrop-filter: blur(12px);
-      text-decoration: none;
-      color: #2C2C2C;
-      font-family: 'heading-Regular';
-      font-weight: 400;
-      font-size: 17px;
-      line-height: 1.28;
-      letter-spacing: -0.588%;
-      transition: all var(--transition-normal);
-      cursor: pointer;
-      border: none;
-    }
-
-    :host(:hover) {
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-primary), var(--shadow-inset);
-    }
-
-    :host(:focus-visible) {
-      outline: 2px solid var(--color-text-primary);
-      outline-offset: 2px;
-    }
-
-    .dot {
-      width: 16px;
-      height: 16px;
-      background: #CFF7D3;
-      border-radius: 50%;
-      flex-shrink: 0;
-      position: relative;
-    }
-
-    .dot::before {
-      content: '';
-      position: absolute;
-      top: 4px;
-      left: 4px;
-      width: 8px;
-      height: 8px;
-      background: #14AE5C;
-      border-radius: 50%;
-    }
-
-    .label {
-      white-space: nowrap;
-    }
-  `;
-
   render() {
     return html`
-      <a href="${this.href}" aria-label="Call ${this.label}">
-        <div class="dot"></div>
-        <span class="label">${this.label}</span>
+      <a href="${this.href}" aria-label="Call ${this.label}" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-800/25 bg-gradient-to-br from-gray-400/25 to-gray-400/25 rounded-full shadow-[0px_1px_8px_0px_rgba(0,0,0,0.1),0px_0px_2px_0px_rgba(0,0,0,0.1),inset_0px_0px_8px_0px_rgba(242,242,242,1),inset_0px_0px_0px_1px_rgba(166,166,166,1),inset_-2px_-2px_0.5px_-2px_rgba(38,38,38,1),inset_2px_2px_0.5px_-2px_rgba(38,38,38,1),inset_3px_3px_0.5px_-3.5px_rgba(255,255,255,1)] backdrop-blur-xl no-underline text-gray-800 font-heading font-normal text-[1.0625rem] leading-[1.28] tracking-[-0.588%] transition-all duration-300 cursor-pointer border-none hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-100 focus-visible:ring-offset-2">
+        <div class="w-4 h-4 bg-green-200 rounded-full flex-shrink-0 relative">
+          <div class="absolute top-1 left-1 w-2 h-2 bg-green-600 rounded-full"></div>
+        </div>
+        <span class="whitespace-nowrap">${this.label}</span>
       </a>
     `;
-  }
-}
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'call-button': CallButton;
   }
 }

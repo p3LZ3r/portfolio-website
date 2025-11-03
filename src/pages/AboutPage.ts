@@ -1,205 +1,33 @@
-import { css, html, LitElement } from "lit";
+import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
 
 @customElement("about-page")
 export class AboutPage extends LitElement {
-  static styles = css`
-    .background {
-      position: relative;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #2C2C2C;
-      filter: blur(6px);
-      z-index: -1;
-    }
-
-    .main {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      height: 100%;
-      width: calc(100% - 48px);
-      padding: 32px;
-      margin: 12px;
-      gap: 48px;
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(14.4px);
-      border-radius: 24px;
-      border
-      margin: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-    .background-image {
-      position: absolute;
-      top: 232px;
-      left: 431px;
-      width: 579px;
-      height: 437px;
-      background-image: url('../assets/background1.png');
-      background-size: cover;
-      background-position: center;
-      z-index: 1;
-    }
-
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-self: stretch;
-      gap: var(--spacing-xl);
-    }
-
-    .header {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-sm);
-      max-width: 872px;
-    }
-
-    .title {
-      font-family: var(--font-family-primary);
-      font-size: 75px;
-      font-weight: 200;
-      color: #F5F5F5;
-    }
-
-    .bio {
-      font-size: 23px;
-      font-weight: 375;
-      color: #1E1E1E;
-      margin: 0;
-      line-height: 1.2;
-      text-align: left;
-    }
-
-    .bottom {
-      position: absolute;
-      bottom: 32px;
-      left: 32px;
-      right: 32px;
-      display: flex;
-      align-items: flex-end;
-      gap: 48px;
-      justify-content: space-between;
-      width: calc(100% - 64px);
-    }
-
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-sm);
-      text-align: right;
-    }
-
-    .link {
-      font-family: 'body-Variable';
-      font-weight: 450;
-      font-size: 17px;
-      line-height: 1.2;
-      color: #B3B3B3;
-      text-decoration: none;
-      transition: color var(--transition-fast);
-      text-align: right;
-    }
-
-    .link.active {
-      color: #F3F3F3;
-    }
-
-    .link.inactive {
-      color: #B3B3B3;
-    }
-
-    .link:hover,
-    .link:focus {
-      color: var(--color-text-muted);
-    }
-
-    .logos {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      opacity: 0.5;
-      padding: 0 48px;
-      justify-content: space-between;
-      width: 100%;
-    }
-
-    .image {
-      width: 240px;
-      height: 320px;
-      background: rgba(0, 0, 0, 0.2);
-      background-image: url('../assets/about-image.png');
-      background-size: cover;
-      background-position: center;
-      border-radius: 16px;
-      flex-shrink: 0;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 1024px) {
-      .top {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .header {
-        align-items: center;
-      }
-
-      .bottom {
-        flex-direction: column;
-        align-items: center;
-        gap: 32px;
-      }
-
-      .links {
-        align-items: center;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .main {
-        padding: var(--spacing-md);
-        margin: 0;
-  
-        border-radius: 0;
-      }
-
-      .image {
-        width: 200px;
-        height: 267px;
-      }
-    }
-  `;
-
   render() {
     return html`
-      <div class="background">        </div>
+      <div class="fixed inset-0 -z-10 bg-gray-800 blur-md"></div>
+      
+      <div class="absolute top-56 left-[27rem] w-[36rem] h-[27rem] bg-cover bg-center -z-10" style="background-image: url('../assets/background1.png');"></div>
 
-      <div class="background-image">        </div>
-
-      <div class="main">
-        <div class="top">
-          <div class="header intersection-fade-in">
-            <h1 class="title">Torsten Linnecke Business Accelerator</h1>
-            <p class="bio">
+      <div class="relative flex flex-col justify-between items-center h-full w-[calc(100%-3rem)] p-8 m-3 gap-12 bg-white/25 backdrop-blur-[14.4px] rounded-2xl border border-white/25">
+        <div class="flex justify-between self-stretch gap-12 max-lg:flex-col max-lg:text-center max-lg:items-center">
+          <div class="flex flex-col gap-3 max-w-[54.5rem] max-lg:items-center intersection-fade-in">
+            <h1 class="font-heading text-[4.6875rem] font-light text-gray-100">Torsten Linnecke Business Accelerator</h1>
+            <p class="text-[1.4375rem] font-medium text-gray-900 m-0 leading-tight text-left max-lg:text-center">
               I am an industrial engineer with a passion for digital design, web development and business process automation. I have made it my mission to make business processes more efficient and increase sales.
             </p>
           </div>
           <call-button class="intersection-slide-up"></call-button>
         </div>
-        <div class="bottom">
-          <div class="links">
-            <a href="#about" class="link active">— About Me</a>
-            <a href="#projects" class="link inactive">- Projects</a>
-            <a href="#contact" class="link inactive">- Contact</a>
+        
+        <div class="absolute bottom-8 left-8 right-8 flex items-end gap-12 justify-between w-[calc(100%-4rem)]">
+          <div class="flex flex-col gap-3 text-right max-lg:text-center max-lg:items-center">
+            <a href="#about" class="font-body font-medium text-[1.0625rem] leading-tight text-gray-400 no-underline transition-colors duration-200 text-right hover:text-gray-300">— About Me</a>
+            <a href="#projects" class="font-body font-medium text-[1.0625rem] leading-tight text-gray-400 no-underline transition-colors duration-200 text-right hover:text-gray-300">- Projects</a>
+            <a href="#contact" class="font-body font-medium text-[1.0625rem] leading-tight text-gray-400 no-underline transition-colors duration-200 text-right hover:text-gray-300">- Contact</a>
           </div>
-          <div class="logos">
+          
+          <div class="flex items-center gap-10 opacity-50 px-12 justify-between w-full max-lg:justify-center">
             <img src="assets/logos.svg" alt="Company logos" />
             <img src="assets/logos.svg" alt="Company logos" />
             <img src="assets/logos.svg" alt="Company logos" />
@@ -207,15 +35,11 @@ export class AboutPage extends LitElement {
             <img src="assets/logos.svg" alt="Company logos" />
             <img src="assets/logos.svg" alt="Company logos" />
           </div>
-          <div class="image" role="img" aria-label="Torsten Linnecke"></div>
+          
+          <div class="w-60 h-80 bg-black/20 bg-cover bg-center rounded-2xl flex-shrink-0" role="img" aria-label="Torsten Linnecke" style="background-image: url('../assets/about-image.png');"></div>
         </div>
       </div>
     `;
   }
 }
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "about-page": AboutPage;
-  }
-}
