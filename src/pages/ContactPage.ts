@@ -1,13 +1,13 @@
-import { LitElement, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { html, LitElement } from "lit";
+import { customElement, state } from "lit/decorators.js";
 
-@customElement('contact-page')
+@customElement("contact-page")
 export class ContactPage extends LitElement {
   @state() private readonly formData = {
-    name: '',
-    company: '',
-    email: '',
-    project: ''
+    name: "",
+    company: "",
+    email: "",
+    project: "",
   };
 
   render() {

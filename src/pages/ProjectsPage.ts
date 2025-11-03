@@ -1,28 +1,28 @@
-import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import type { ProjectData } from '../components/ProjectCard.js';
+import { html, LitElement } from "lit";
+import { customElement } from "lit/decorators.js";
+import type { ProjectData } from "../components/ProjectCard.js";
 
-@customElement('projects-page')
+@customElement("projects-page")
 export class ProjectsPage extends LitElement {
   private readonly projects: ProjectData[] = [
     {
-      title: 'Project A',
-      description: 'This was a super fun and enjoyable project.',
-      techStack: ['SEO', 'Design', 'WordPress', 'WooCommerce'],
-      link: '#'
+      title: "Project A",
+      description: "This was a super fun and enjoyable project.",
+      techStack: ["SEO", "Design", "WordPress", "WooCommerce"],
+      link: "#",
     },
     {
-      title: 'Project B',
-      description: 'Another amazing project with great results.',
-      techStack: ['React', 'Node.js', 'MongoDB', 'AWS'],
-      link: '#'
+      title: "Project B",
+      description: "Another amazing project with great results.",
+      techStack: ["React", "Node.js", "MongoDB", "AWS"],
+      link: "#",
     },
     {
-      title: 'Project C',
-      description: 'A challenging project that pushed boundaries.',
-      techStack: ['Vue.js', 'TypeScript', 'GraphQL', 'Docker'],
-      link: '#'
-    }
+      title: "Project C",
+      description: "A challenging project that pushed boundaries.",
+      techStack: ["Vue.js", "TypeScript", "GraphQL", "Docker"],
+      link: "#",
+    },
   ];
 
   render() {
@@ -37,9 +37,11 @@ export class ProjectsPage extends LitElement {
         
         <div class="flex flex-col self-stretch gap-12 overflow-y-auto max-h-[60vh] max-lg:max-h-none max-lg:overflow-visible">
           <div class="flex flex-col gap-12">
-            ${this.projects.map(project => html`
+            ${this.projects.map(
+              (project) => html`
               <project-card .project="${project}"></project-card>
-            `)}
+            `
+            )}
           </div>
         </div>
         
