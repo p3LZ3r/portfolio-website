@@ -1,21 +1,28 @@
 import { html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import "./styles/global.css";
+//import "./styles/global.css";
+import "./styles/animations.css";
 import "./components/CallButton";
 import "./components/ProjectCard";
 import "./components/FormInput";
-import "./components/BottomNav";
 import "./pages/AboutPage";
 import "./pages/ProjectsPage";
 import "./pages/ContactPage";
+import { initViewportAnimations } from "./utils/viewportAnimator";
+import { startPageTransition, prepareViewTransitionElements, cleanupViewTransitionElements, isViewTransitionActive } from "./utils/viewTransitionManager";
 
-// Import Tailwind CSS for Shadow DOM compatibility
-import "tailwindcss";
+// Constants for magic numbers
+const THRESHOLD_ZERO = 0;
+const THRESHOLD_LOW = 0.08;
+const THRESHOLD_MEDIUM = 0.2;
+const THRESHOLD_HIGH = 0.5;
+
+type RouteType = "about" | "projects" | "contact";
 
 @customElement("portfolio-app")
 export class PortfolioApp extends LitElement {
-  @state() private currentRoute: "about" | "projects" | "contact" =
-    (location.hash.replace("#", "") as any) || "about";
+  @state() private currentRoute: RouteType =
+    (location.hash.replace("#", "") as RouteType) || "about";
 
   connectedCallback() {
     super.connectedCallback();
@@ -31,54 +38,66 @@ export class PortfolioApp extends LitElement {
   private _syncRouteFromLocation() {
     const hash = location.hash.replace("#", "");
     if (hash === "about" || hash === "projects" || hash === "contact") {
-      this.currentRoute = hash;
+      this.currentRoute = hash as RouteType;
     } else {
       this.currentRoute = "about";
     }
   }
 
-  private _onHashChange = () => {
-    this._syncRouteFromLocation();
+  private readonly _onHashChange = () => {
+    this._handleRouteChange();
   };
 
-  private _withViewTransition(updateFn: () => void) {
-    if ("startViewTransition" in document) {
-      (document as any).startViewTransition(updateFn);
-    } else {
-      updateFn();
-    }
+  private _handleRouteChange() {
+    // Prepare view transition elements before route change
+    prepareViewTransitionElements();
+    
+    // Use view transition if supported, otherwise just update route
+    startPageTransition(() => {
+      this._syncRouteFromLocation();
+    }).finally(() => {
+      // Clean up view transition elements after transition
+      cleanupViewTransitionElements();
+    });
   }
 
-  private _navigate(to: "about" | "projects" | "contact") {
-    this._withViewTransition(() => {
-      this.currentRoute = to;
-      history.pushState({ page: to }, "", "#" + to);
-    });
-    // After navigation completes, move focus to the newly-rendered page's main heading
-    this.updateComplete.then(() => {
-      const page = this.shadowRoot?.querySelector(`${this.currentRoute}-page`);
-      const heading =
-        page?.querySelector("h1") || page?.querySelector('[role="main"]');
-      if (heading instanceof HTMLElement) {
-        heading.focus();
-      }
-    });
+  firstUpdated() {
+    // Initialize viewport animations after the component is rendered
+    this.initializeAnimations();
+  }
+
+  private initializeAnimations() {
+    // Only initialize on client-side, not during SSR
+    if (typeof window !== 'undefined') {
+      // Initialize the viewport animation system with document as root
+      // This ensures we observe all elements in the page, including those in custom elements
+      const viewportAnimations = initViewportAnimations(document, {
+        rootMargin: "0px 0px -8% 0px",
+        threshold: [THRESHOLD_ZERO, THRESHOLD_LOW, THRESHOLD_MEDIUM, THRESHOLD_HIGH],
+        defaultDuration: 600,
+        defaultStagger: 60,
+        pauseOnViewTransition: true,
+      });
+
+      // Store the animation controller for potential cleanup
+      (this as { _viewportAnimations?: { disconnect: () => void; pause: () => void; resume: () => void } })._viewportAnimations = viewportAnimations;
+    }
   }
 
   render() {
     return html`
       <main>
-        ${this.currentRoute === "about" ? html`<about-page></about-page>` : ""}
-        ${this.currentRoute === "projects" ? html`<projects-page></projects-page>` : ""}
-        ${this.currentRoute === "contact" ? html`<contact-page></contact-page>` : ""}
-        <bottom-nav .current=${this.currentRoute} @navigate=${(e: any) => this._navigate(e.detail.to)}></bottom-nav>
+        ${this.currentRoute === "about" ? html`<about-page data-view-transition="page-main"></about-page>` : ""}
+        ${this.currentRoute === "projects" ? html`<projects-page data-view-transition="page-main"></projects-page>` : ""}
+        ${this.currentRoute === "contact" ? html`<contact-page data-view-transition="page-main"></contact-page>` : ""}
       </main>
     `;
   }
 }
 
 declare global {
-  interface HTMLElementTagNameMap {
+  // biome-ignore lint/suspicious/noExplicitAny: Required for LitElement custom elements
+  const HTMLElementTagNameMap: any & {
     "portfolio-app": PortfolioApp;
-  }
+  };
 }

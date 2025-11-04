@@ -14,13 +14,13 @@ export class ContactPage extends LitElement {
 
   render() {
     return html`
-      <div class="absolute inset-0 -z-10 bg-gray-800 blur-md"></div>
+      <div class="fixed inset-0 -z-10 bg-radial-[at_25%_25%] from-zinc-700 to-zinc-900 to-75% blur-md"></div>
       
-      <div class="flex flex-col items-center min-h-screen p-8 gap-12 bg-white/25 backdrop-blur-[14.4px] rounded-2xl m-3">
-        <div class="flex justify-center self-stretch gap-12 max-lg:flex-col max-lg:text-center">
-          <div class="flex flex-col gap-3 max-w-[54.5rem] text-center">
-            <h2 class="text-[clamp(1.5rem,3vw,2.8125rem)] font-light text-gray-100 m-0">Contact</h2>
-            <p class="text-[clamp(0.875rem,2vw,1.4375rem)] text-gray-300 m-0 leading-tight">For everyone with tele-phobia.</p>
+      <div class="relative flex flex-col justify-between items-center m-3 w-[calc(100vw-1.5rem)] min-h-[calc(100vh-1.5rem)] p-8 gap-12 bg-white/25 backdrop-blur-[14.4px] rounded-4xl border border-white/25 border-squircle">
+        <div class="flex justify-between self-stretch gap-12 max-lg:flex-col max-lg:text-center max-lg:items-center">
+          <div class="flex flex-col gap-3 text-center">
+            <h1 class="font-heading text-[4.6875rem] font-light text-zinc-100">Contact</h1>
+            <p class="text-[1.4375rem] font-medium text-zinc-900 m-0 max-w-4xl leading-tight text-left max-lg:text-center">For everyone with tele-phobia.</p>
           </div>
           <call-button></call-button>
         </div>
@@ -52,14 +52,14 @@ export class ContactPage extends LitElement {
             .value="${this.formData.project}"
             @input-change="${this._handleProjectChange}"
           ></form-input>
-          <button type="submit" class="self-end font-body font-medium text-[1.0625rem] leading-tight text-gray-100 bg-transparent border-none cursor-pointer p-0 transition-colors duration-200 hover:text-gray-300">Send →</button>
+          <button type="submit" class="self-end font-body font-medium text-[1.0625rem] leading-tight text-zinc-100 bg-transparent border-none cursor-pointer p-0 transition-colors duration-200 hover:text-zinc-300">Send →</button>
         </form>
         
         <div class="flex justify-between items-end self-stretch gap-12 max-lg:flex-col max-lg:items-center max-lg:gap-8">
-          <div class="flex flex-col gap-3">
-            <a href="#about" class="font-body font-medium text-[1.0625rem] leading-tight text-gray-100 no-underline transition-colors duration-200 hover:text-gray-300">— About Me</a>
-            <a href="#projects" class="font-body font-medium text-[1.0625rem] leading-tight text-gray-400 no-underline transition-colors duration-200 hover:text-gray-300">- Projects</a>
-            <a href="#contact" class="font-body font-medium text-[1.0625rem] leading-tight text-gray-400 no-underline transition-colors duration-200 hover:text-gray-300">- Contact</a>
+          <div class="flex flex-col gap-3 text-left max-lg:text-center max-lg:items-center">
+            <a href="#about" class="font-body font-medium text-[1.0625rem] leading-tight text-zinc-400 no-underline transition-colors duration-200 hover:text-zinc-300 whitespace-nowrap">- About Me</a>
+            <a href="#projects" class="font-body font-medium text-[1.0625rem] leading-tight text-zinc-400 no-underline transition-colors duration-200 hover:text-zinc-300 whitespace-nowrap">- Projects</a>
+            <a href="#contact" class="font-body font-medium text-[1.0625rem] leading-tight text-zinc-300 no-underline transition-colors duration-200 hover:text-zinc-300 whitespace-nowrap">— Contact</a>
           </div>
         </div>
       </div>

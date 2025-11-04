@@ -1,12 +1,12 @@
 /**
  * Global CSS Base Styles - Consolidated
- * 
+ *
  * This file is the single source of truth for all styling in the application.
  * It now includes merged content from the previous separate files:
  * - Original global.css (base styles, fonts, variables, resets)
  * - tailwind.css (Tailwind imports and utilities)
  * - tailwind-components.css (component classes)
- * 
+ *
  * This consolidation maintains the original structure while providing a single
  * entry point for all styling needs.
  */
@@ -159,7 +159,7 @@ body {
   margin: 0;
   position: relative;
   container-type: inline-size;
-  overflow: none;
+  overflow: hidden;
 }
 
 /* Focus styles */
@@ -214,8 +214,6 @@ p {
   line-height: 1.2;
 }
 
-
-
 /* ========================================
    UTILITIES LAYER - Additional Utilities
    ======================================== */
@@ -262,3 +260,5 @@ p {
 .skip-link:focus {
   top: 6px;
 }
+
+

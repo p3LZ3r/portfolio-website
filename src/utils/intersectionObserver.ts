@@ -8,16 +8,14 @@ export class ScrollAnimationManager {
       (entries) => {
         entries.forEach((entry) => {
           const callback = this.observedElements.get(entry.target);
-          if (callback) {
-            if (entry.isIntersecting) {
-              callback();
-            }
+          if (callback && entry.isIntersecting) {
+            callback();
           }
         });
       },
       {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: "0px 0px -50px 0px",
       }
     );
   }

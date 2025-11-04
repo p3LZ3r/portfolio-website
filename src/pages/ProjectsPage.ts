@@ -29,29 +29,37 @@ export class ProjectsPage extends LitElement {
 
   render() {
     return html`
-      <div class="absolute inset-0 -z-10 bg-gray-800 blur-md"></div>
+      <div class="fixed inset-0 -z-10 bg-radial-[at_25%_25%] from-zinc-700 to-zinc-900 to-75% blur-md"></div>
       
-      <div class="flex flex-col items-center min-h-screen p-8 gap-12 bg-white/25 backdrop-blur-[14.4px] rounded-2xl m-3">
-        <div class="flex justify-center self-stretch gap-12 max-lg:flex-col max-lg:text-center">
-          <h2 class="text-[clamp(1.5rem,3vw,2.8125rem)] font-light text-gray-100 m-0">Selected Projects</h2>
+      <div class="relative flex flex-col justify-between items-center m-3 w-[calc(100vw-1.5rem)] min-h-[calc(100vh-1.5rem)] p-8 gap-12 bg-white/25 backdrop-blur-[14.4px] rounded-4xl border border-white/25 border-squircle">
+        <div class="flex justify-between self-stretch gap-12 max-lg:flex-col max-lg:text-center max-lg:items-center">
+          <h1 class="text-[clamp(1.5rem,3vw,2.8125rem)] font-light text-zinc-100 m-0">Selected Projects</h2>
           <call-button></call-button>
         </div>
         
-        <div class="flex flex-col self-stretch gap-12 overflow-y-auto max-h-[60vh] max-lg:max-h-none max-lg:overflow-visible">
-          <div class="flex flex-col gap-12">
+        <div class="relative flex flex-col self-stretch gap-12 overflow-y-auto max-h-[60vh] max-lg:max-h-none max-lg:overflow-visible scrollbar scrollbar-thumb-sky-700 scrollbar-track-sky-300">
+          <ul class="relative flex flex-col gap-12 list-none p-0 m-0">
             ${this.projects.map(
               (project) => html`
-              <project-card .project="${project}"></project-card>
+              <li class="list-none">
+                <project-card .project="${project}"></project-card>
+              </li>
             `
             )}
-          </div>
+            <li class="list-none sticky bottom-0 pointer-events-none z-50">
+              <div class="w-full pointer-events-none">
+                <div class="shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+                  <hr class="h-px border-t-0 bg-transparent bg-linear-to-r from-transparent via-gray-400 to-transparent opacity-50">
+                </div>
+            </li>
+          </ul>
         </div>
         
         <div class="flex justify-between items-end self-stretch gap-12 max-lg:flex-col max-lg:items-center max-lg:gap-8">
-          <div class="flex flex-col gap-3">
-            <a href="#about" class="font-body font-medium text-[1.0625rem] leading-tight text-gray-400 no-underline transition-colors duration-200 hover:text-gray-300">— About Me</a>
-            <a href="#projects" class="font-body font-medium text-[1.0625rem] leading-tight text-gray-100 no-underline transition-colors duration-200 hover:text-gray-300">- Projects</a>
-            <a href="#contact" class="font-body font-medium text-[1.0625rem] leading-tight text-gray-400 no-underline transition-colors duration-200 hover:text-gray-300">- Contact</a>
+          <div class="flex flex-col gap-3 text-left max-lg:text-center max-lg:items-center">
+            <a href="#about" class="font-body font-medium text-[1.0625rem] leading-tight text-zinc-400 no-underline transition-colors duration-200 hover:text-zinc-300 whitespace-nowrap">- About Me</a>
+            <a href="#projects" class="font-body font-medium text-[1.0625rem] leading-tight text-zinc-300 no-underline transition-colors duration-200 hover:text-zinc-300 whitespace-nowrap">— Projects</a>
+            <a href="#contact" class="font-body font-medium text-[1.0625rem] leading-tight text-zinc-400 no-underline transition-colors duration-200 hover:text-zinc-300 whitespace-nowrap">- Contact</a>
           </div>
         </div>
       </div>
