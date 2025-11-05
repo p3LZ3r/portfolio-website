@@ -31,14 +31,21 @@ export class ProjectsPage extends LitElement {
     return html`
       <div class="fixed inset-0 -z-10 bg-radial-[at_25%_25%] from-zinc-700 to-zinc-900 to-75% blur-md"></div>
       
-      <div class="relative flex flex-col justify-between items-center m-3 w-[calc(100vw-1.5rem)] min-h-[calc(100vh-1.5rem)] p-8 gap-12 bg-white/25 backdrop-blur-[14.4px] rounded-4xl border border-white/25 border-squircle">
+      <div class="relative flex flex-col justify-between items-center m-4 w-[calc(100vw-2rem)] min-h-[calc(100vh-2rem)] p-8 gap-12 bg-white/25 backdrop-blur-[14.4px] rounded-4xl border border-white/25 border-squircle">
         <div class="flex justify-between self-stretch gap-12 max-lg:flex-col max-lg:text-center max-lg:items-center">
-          <h1 class="text-[clamp(1.5rem,3vw,2.8125rem)] font-light text-zinc-100 m-0">Selected Projects</h2>
+          <h1 class="text-[clamp(1.5rem,3vw,2.8125rem)] font-light text-zinc-100 m-0">Selected Projects</h1>
           <call-button></call-button>
         </div>
         
-        <div class="relative flex flex-col self-stretch gap-12 overflow-y-auto max-h-[60vh] max-lg:max-h-none max-lg:overflow-visible scrollbar scrollbar-thumb-sky-700 scrollbar-track-sky-300">
-          <ul class="relative flex flex-col gap-12 list-none p-0 m-0">
+        <div class="relative flex flex-col self-stretch overflow-y-auto max-h-[60vh] max-lg:max-h-none max-lg:overflow-visible scrollbar scrollbar-thumb-zinc-100 scrollbar-track-transparent">
+          <ul class="relative flex flex-col list-none p-0 m-0">
+            <li class="list-none sticky top-0 pointer-events-none z-50">
+              <div class="w-full pointer-events-none">
+                <div class="shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+                  <hr class="h-px border-t-0 bg-transparent bg-linear-to-r from-transparent via-gray-400 to-transparent opacity-50">
+                </div>
+              </div>
+            </li>
             ${this.projects.map(
               (project) => html`
               <li class="list-none">
@@ -51,6 +58,7 @@ export class ProjectsPage extends LitElement {
                 <div class="shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
                   <hr class="h-px border-t-0 bg-transparent bg-linear-to-r from-transparent via-gray-400 to-transparent opacity-50">
                 </div>
+              </div>
             </li>
           </ul>
         </div>

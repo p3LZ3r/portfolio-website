@@ -2,6 +2,133 @@
 
 A modern, responsive portfolio website built with LitElement and TypeScript.
 
+## View Transitions API Integration
+
+This project includes native View Transitions API support for smooth page transitions in Chromium-based browsers (Chrome 111+, Edge 111+).
+
+### Feature Detection
+
+The system automatically detects View Transitions API support and user preferences:
+
+```typescript
+import { isViewTransitionSupported, getViewTransitionInfo } from './utils/viewTransitionSupport';
+
+// Check if view transitions are supported
+if (isViewTransitionSupported()) {
+  // View transitions will be used
+} else {
+  // Fallback to instant route changes
+}
+
+// Get detailed feature information
+const info = getViewTransitionInfo();
+// Returns: { supported: boolean, reducedMotion: boolean, apiAvailable: boolean }
+```
+
+### Page-Level Transitions
+
+Route changes automatically use View Transitions API when supported:
+
+- **Chrome/Edge 111+**: Smooth layout-aware transitions between pages
+- **Firefox/Safari**: Instant route changes with existing viewport animations
+- **Reduced Motion**: Transitions disabled, instant content visibility
+
+### Component Integration
+
+Components can participate in view transitions using two approaches:
+
+#### 1. Data Attribute (Light DOM)
+```html
+<!-- Page components with data-view-transition -->
+<about-page data-view-transition="page-main"></about-page>
+<projects-page data-view-transition="page-main"></projects-page>
+```
+
+#### 2. CSS Parts (Shadow DOM)
+```typescript
+// In Lit component render method
+render() {
+  return html`
+    <div part="view-transition-target">
+      <!-- Component content -->
+    </div>
+  `;
+}
+```
+
+### View Transition Manager API
+
+```typescript
+import { 
+  startPageTransition, 
+  isViewTransitionActive,
+  prepareViewTransitionElements,
+  cleanupViewTransitionElements 
+} from './utils/viewTransitionManager';
+
+// Start a page transition
+await startPageTransition(() => {
+  // Update route state here
+  this.currentRoute = 'projects';
+});
+
+// Check if transition is active
+if (isViewTransitionActive()) {
+  // Pause other animations
+}
+
+// Manual element preparation (usually handled automatically)
+prepareViewTransitionElements();
+// ...transition happens...
+cleanupViewTransitionElements();
+```
+
+### CSS Customization
+
+View transitions use CSS variables for customization:
+
+```css
+:root {
+  --view-transition-duration: 300ms;
+  --view-transition-easing: ease-out;
+  --view-transition-name: auto;
+}
+
+/* Target elements for transitions */
+[data-view-transition] {
+  view-transition-name: var(--view-transition-name, auto);
+}
+
+/* Shadow DOM parts */
+::part(view-transition-target) {
+  view-transition-name: var(--view-transition-name, auto);
+}
+
+/* Transition pseudo-elements */
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: var(--view-transition-duration, 300ms);
+  animation-timing-function: var(--view-transition-easing, ease-out);
+}
+```
+
+### Accessibility & Reduced Motion
+
+The system respects user accessibility preferences:
+
+- **Reduced Motion Detection**: Automatically disables view transitions when `prefers-reduced-motion: reduce`
+- **Graceful Fallback**: Non-supporting browsers get instant route changes
+- **Screen Reader Support**: Transitions don't interfere with assistive technology
+
+### Browser Compatibility
+
+| Browser | View Transitions | Fallback | Reduced Motion |
+|---------|------------------|-----------|----------------|
+| Chrome 111+ | ✅ Native | N/A | ✅ Respected |
+| Edge 111+ | ✅ Native | N/A | ✅ Respected |
+| Firefox | ❌ Not Supported | CSS Classes | ✅ Respected |
+| Safari | ❌ Not Supported | CSS Classes | ✅ Respected |
+
 ## Viewport Animation System
 
 This project includes a custom viewport animation system that provides smooth, performant animations when elements enter the viewport.

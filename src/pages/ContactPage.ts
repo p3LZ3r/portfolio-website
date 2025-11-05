@@ -16,7 +16,7 @@ export class ContactPage extends LitElement {
     return html`
       <div class="fixed inset-0 -z-10 bg-radial-[at_25%_25%] from-zinc-700 to-zinc-900 to-75% blur-md"></div>
       
-      <div class="relative flex flex-col justify-between items-center m-3 w-[calc(100vw-1.5rem)] min-h-[calc(100vh-1.5rem)] p-8 gap-12 bg-white/25 backdrop-blur-[14.4px] rounded-4xl border border-white/25 border-squircle">
+      <div class="relative flex flex-col justify-between items-center m-4 w-[calc(100vw-2rem)] min-h-[calc(100vh-2em)] p-8 gap-12 bg-white/25 backdrop-blur-[14.4px] rounded-4xl border border-white/25 border-squircle" part="view-transition-target">
         <div class="flex justify-between self-stretch gap-12 max-lg:flex-col max-lg:text-center max-lg:items-center">
           <div class="flex flex-col gap-3 text-center">
             <h1 class="font-heading text-[4.6875rem] font-light text-zinc-100">Contact</h1>

@@ -48,7 +48,7 @@ export class ProjectCard extends LitElement {
             </div>
           </div>
           
-          <div class="flex-shrink-0 w-[25rem] h-[15.625rem] bg-black/20 rounded-xl flex items-center justify-center text-zinc-400 text-base max-lg:w-full max-lg:h-52" aria-hidden="true">
+          <div class="shrink-0 w-100 h-62.5 bg-black/20 rounded-xl flex items-center justify-center text-zinc-400 text-base max-lg:w-full max-lg:h-52" aria-hidden="true">
             Project Image
           </div>
         </div>

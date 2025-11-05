@@ -1,21 +1,106 @@
-/**
- * Global CSS Base Styles - Consolidated
- *
- * This file is the single source of truth for all styling in the application.
- * It now includes merged content from the previous separate files:
- * - Original global.css (base styles, fonts, variables, resets)
- * - tailwind.css (Tailwind imports and utilities)
- * - tailwind-components.css (component classes)
- *
- * This consolidation maintains the original structure while providing a single
- * entry point for all styling needs.
- */
-
-/* Import animations first */
-@import "./animations.css";
-
-/* Import Tailwind CSS */
+/* Tailwind imports */
 @import "tailwindcss";
+
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "@tailwindcss/typography";
+@import "@tailwindcss/forms";
+@import "tailwind-scrollbar";
+
+@theme {
+  /* Font families */
+  --font-family-heading: "heading", serif;
+  --font-family-body: "body", system-ui, sans-serif;
+
+  /* Colors */
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #1e1e1e;
+  --color-text-muted: #b3b3b3;
+  --color-bg-primary: #2c2c2c;
+  --color-bg-secondary: rgba(255, 255, 255, 0.25);
+  --color-accent: #2c2c2c;
+  --color-accent-hover: rgba(140, 140, 140, 0.25);
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  /* Radii */
+  --border-radius-md: 1rem;
+  --border-radius-lg: 1.5rem;
+  --border-radius-full: 100px;
+
+  /* Shadows */
+  --shadow-primary:
+    0px 1px 8px rgba(0, 0, 0, 0.1), 0px 0px 2px rgba(0, 0, 0, 0.1);
+  --shadow-inset:
+    inset 0 0 8px rgba(242, 242, 242, 1), inset 0 0 0 1px rgba(166, 166, 166, 1);
+}
+
+/* Base defaults mapped to tokens */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    font-family: var(--font-family-body);
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-primary);
+  }
+}
+
+/* Component classes */
+@layer components {
+  .card {
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-primary);
+    padding: var(--spacing-md);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--spacing-sm) / 2) var(--spacing-sm);
+    border-radius: var(--border-radius-md);
+    background-color: var(--color-accent);
+    color: var(--color-text-primary);
+    transition: background-color 0.2s ease;
+  }
+  .btn:hover {
+    background-color: var(--color-accent-hover);
+  }
+}
+
+/* Custom utilities using CSS-first APIs */
+@layer utilities {
+  @utility content-auto {
+    content-visibility: auto;
+  }
+
+  /* Semantic utilities mapped to CSS vars */
+  .bg-accent {
+    background-color: var(--color-accent) !important;
+  }
+  .bg-accent-hover {
+    background-color: var(--color-accent-hover) !important;
+  }
+  .text-primary {
+    color: var(--color-text-primary) !important;
+  }
+  .text-muted {
+    color: var(--color-text-muted) !important;
+  }
+  .rounded-md {
+    border-radius: var(--border-radius-md) !important;
+  }
+}
 
 /* ========================================
    BASE LAYER - Fonts, Variables, Resets
@@ -80,113 +165,6 @@
   font-display: swap;
 }
 
-/* CSS Variables and Resets */
-:root {
-  /* Colors from Figma */
-  --color-text-primary: #f5f5f5;
-  --color-text-secondary: #1e1e1e;
-  --color-text-muted: #b3b3b3;
-  --color-bg-primary: #2c2c2c;
-  --color-bg-secondary: rgba(255, 255, 255, 0.25);
-  --color-accent: #2c2c2c;
-  --color-accent-hover: rgba(140, 140, 140, 0.25);
-
-  /* Typography */
-  --font-family-primary: "heading", serif;
-  --font-family-secondary: "body", sans-serif;
-
-  /* Spacing */
-  --spacing-xs: 8px;
-  --spacing-sm: 16px;
-  --spacing-md: 24px;
-  --spacing-lg: 32px;
-  --spacing-xl: 48px;
-
-  /* Border radius */
-  --border-radius-sm: 16px;
-  --border-radius-lg: 24px;
-  --border-radius-full: 100px;
-
-  /* Shadows */
-  --shadow-primary:
-    0px 1px 8px 0px rgba(0, 0, 0, 0.1), 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
-  --shadow-inset:
-    inset 0px 0px 8px 0px rgba(242, 242, 242, 1), inset 0px 0px 0px 1px rgba(
-      166,
-      166,
-      166,
-      1
-    ), inset -2px -2px 0.5px -2px rgba(38, 38, 38, 1), inset 2px 2px 0.5px -2px rgba(
-      38,
-      38,
-      38,
-      1
-    ), inset 3px 3px 0.5px -3.5px rgba(255, 255, 255, 1);
-  --shadow-backdrop: blur(14.4px);
-
-  /* Transitions */
-  --transition-fast: 0.2s ease;
-  --transition-normal: 0.3s ease;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* CSS Reset and Base Styles */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  font-family: var(--font-family-secondary);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.2;
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
-  scroll-behavior: smooth;
-}
-
-body {
-  min-height: 100vh;
-  width: 100vw;
-  padding: 0;
-  margin: 0;
-  position: relative;
-  container-type: inline-size;
-  overflow: hidden;
-}
-
-/* Focus styles */
-:focus-visible {
-  outline: 2px solid var(--color-text-primary);
-  outline-offset: 2px;
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Container queries support */
-@supports (container-type: inline-size) {
-  .container {
-    container-type: inline-size;
-  }
-}
-
 /* Fluid typography */
 h1,
 h2,
@@ -214,51 +192,6 @@ p {
   line-height: 1.2;
 }
 
-/* ========================================
-   UTILITIES LAYER - Additional Utilities
-   ======================================== */
-
-/* Screen reader only utility */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+@utility border-squircle {
+  corner-shape: squircle;
 }
-
-/* Visually hidden utility */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Skip link for accessibility */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: var(--color-text-primary);
-  color: var(--color-bg-primary);
-  padding: 8px;
-  text-decoration: none;
-  z-index: 1000;
-  transition: top var(--transition-fast);
-}
-
-.skip-link:focus {
-  top: 6px;
-}
-
-
