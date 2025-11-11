@@ -1,6 +1,6 @@
 import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
-import { shadowDomStyles } from "../styles/shadow-dom.css";
+import { shadowDomStyles } from "../styles/shadow-dom.css.js";
 
 @customElement("about-page")
 export class AboutPage extends LitElement {

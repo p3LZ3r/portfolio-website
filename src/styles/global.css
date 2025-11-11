@@ -3,9 +3,10 @@
 
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
-@import "@tailwindcss/typography";
-@import "@tailwindcss/forms";
-@import "tailwind-scrollbar";
+/* Load Tailwind's legacy plugins directly from the CSS entrypoint. */
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+@plugin "tailwind-scrollbar";
 
 @theme {
   /* Font families */
@@ -78,28 +79,30 @@
   }
 }
 
-/* Custom utilities using CSS-first APIs */
-@layer utilities {
-  @utility content-auto {
-    content-visibility: auto;
-  }
+/* Custom utility classes */
+.content-auto {
+  content-visibility: auto;
+}
 
-  /* Semantic utilities mapped to CSS vars */
-  .bg-accent {
-    background-color: var(--color-accent) !important;
-  }
-  .bg-accent-hover {
-    background-color: var(--color-accent-hover) !important;
-  }
-  .text-primary {
-    color: var(--color-text-primary) !important;
-  }
-  .text-muted {
-    color: var(--color-text-muted) !important;
-  }
-  .rounded-md {
-    border-radius: var(--border-radius-md) !important;
-  }
+/* Semantic utilities mapped to CSS vars */
+.bg-accent {
+  background-color: var(--color-accent) !important;
+}
+
+.bg-accent-hover {
+  background-color: var(--color-accent-hover) !important;
+}
+
+.text-primary {
+  color: var(--color-text-primary) !important;
+}
+
+.text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+.rounded-md {
+  border-radius: var(--border-radius-md) !important;
 }
 
 /* ========================================
@@ -172,7 +175,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-family-primary);
+  font-family: var(--font-family-heading);
   font-weight: 200;
   letter-spacing: -0.01em;
   text-transform: uppercase;
@@ -192,6 +195,37 @@ p {
   line-height: 1.2;
 }
 
-@utility border-squircle {
+.border-squircle {
   corner-shape: squircle;
+}
+
+/* Accessible skip link styling */
+.skip-link {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -200%);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border-radius: var(--border-radius-md);
+  z-index: 100;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 0;
+}
+
+.skip-link:focus {
+  transform: translate(-50%, 1rem);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,4 +1,4 @@
-import { html, LitElement } from "lit";
+import { html, LitElement, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { shadowDomStyles } from "../styles/shadow-dom.css.js";
 
@@ -7,8 +7,13 @@ export class FormInput extends LitElement {
   static styles = shadowDomStyles;
   @property({ type: String }) placeholder = "Your name";
   @property({ type: String }) value = "";
-  @property({ type: Boolean }) active = false;
+  @property({ type: Boolean, reflect: true }) active = false;
   @property({ type: String }) type = "text";
+  @property({ type: String }) name = "";
+  @property({ type: String }) autocomplete = "";
+  @property({ type: Boolean }) required = false;
+  @property({ type: Boolean }) invalid = false;
+  @property({ type: String, attribute: "described-by" }) describedBy = "";
 
   render() {
     return html`
@@ -18,6 +23,11 @@ export class FormInput extends LitElement {
           type="${this.type}"
           placeholder="${this.placeholder}"
           .value="${this.value}"
+          name=${this.name || nothing}
+          autocomplete=${this.autocomplete || nothing}
+          ?required="${this.required}"
+          aria-invalid="${this.invalid ? "true" : "false"}"
+          aria-describedby=${this.describedBy || nothing}
           @input="${this._handleInput}"
           @focus="${this._handleFocus}"
           @blur="${this._handleBlur}"
@@ -40,10 +50,12 @@ export class FormInput extends LitElement {
   }
 
   private _handleFocus() {
+    this.active = true;
     this.dispatchEvent(new CustomEvent("input-focus", { bubbles: true }));
   }
 
   private _handleBlur() {
+    this.active = false;
     this.dispatchEvent(new CustomEvent("input-blur", { bubbles: true }));
   }
 }

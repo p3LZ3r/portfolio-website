@@ -12,11 +12,11 @@ type RouteType = "about" | "projects" | "contact";
 
 @customElement("portfolio-app")
 export class PortfolioApp extends LitElement {
-  @state() private currentRoute: RouteType =
-    (location.hash.replace("#", "") as RouteType) || "about";
+  @state() private currentRoute: RouteType = "about";
 
   connectedCallback() {
     super.connectedCallback();
+    this._syncRouteFromLocation();
     window.addEventListener("hashchange", this._onHashChange);
   }
 
@@ -45,7 +45,7 @@ export class PortfolioApp extends LitElement {
 
   render() {
     return html`
-      <main>
+      <main id="main-content" class="content-auto">
         ${this.currentRoute === "about" ? html`<about-page></about-page>` : ""}
         ${this.currentRoute === "projects" ? html`<projects-page></projects-page>` : ""}
         ${this.currentRoute === "contact" ? html`<contact-page></contact-page>` : ""}

@@ -1,7 +1,7 @@
 import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
 import type { ProjectData } from "../components/ProjectCard.js";
-import { shadowDomStyles } from "../styles/shadow-dom.css";
+import { shadowDomStyles } from "../styles/shadow-dom.css.js";
 
 @customElement("projects-page")
 export class ProjectsPage extends LitElement {
