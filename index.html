@@ -61,6 +61,20 @@
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <portfolio-app></portfolio-app>
+
+  <!-- Cal.com Embed Configuration -->
+  <script type="module">// Import our Cal.com wrapper utility
+    import { setForwardQueryParams, setupCalEmbeds } from "/src/utils/cal.ts";
+
+    // Initialize Cal.com embeds when DOM is ready
+    document.addEventListener("DOMContentLoaded", () => {
+      // Enable query parameter forwarding for better UX
+      setForwardQueryParams(true);
+
+      // Setup automatic loading and initialization for elements with data-cal-link
+      setupCalEmbeds();
+    });
+  </script>
 </body>
 
 </html>

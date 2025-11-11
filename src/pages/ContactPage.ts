@@ -1,6 +1,7 @@
 import { html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import { shadowDomStyles } from "../styles/shadow-dom.css";
+import { openCalModal } from "../utils/cal";
 
 @customElement("contact-page")
 export class ContactPage extends LitElement {
@@ -22,7 +23,9 @@ export class ContactPage extends LitElement {
             <h1 class="font-heading text-[4.6875rem] font-light text-zinc-100">Contact</h1>
             <p class="text-[1.4375rem] font-medium text-zinc-900 m-0 max-w-4xl leading-tight text-left max-lg:text-center">For everyone with tele-phobia.</p>
           </div>
-          <call-button></call-button>
+          <call-button 
+            @click="${this._handleCallButtonClick}"
+          ></call-button>
         </div>
         
         <form class="flex flex-col self-stretch gap-8 max-w-[37.0625rem]" @submit="${this._handleSubmit}" novalidate>
@@ -86,5 +89,22 @@ export class ContactPage extends LitElement {
 
   private _handleProjectChange(e: CustomEvent) {
     this.formData.project = e.detail.value;
+  }
+
+  private _handleCallButtonClick(e: Event) {
+    e.preventDefault();
+    
+    // Open Cal.com modal with prefill data if available
+    const prefill = {
+      name: this.formData.name || undefined,
+      email: this.formData.email || undefined,
+    };
+    
+    openCalModal("tlinnecke/45min", {
+      config: { layout: "month_view" },
+      prefill
+    }, "45min").catch(() => {
+      // Silently handle errors to avoid breaking app
+    });
   }
 }
